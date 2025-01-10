@@ -1,3 +1,21 @@
+from django.test import TestCase
+from django.urls import reverse
+
+from accounts.models import User
+
+# from .models import Like, Tweet
+
+
+class TestHomeView(TestCase):  # 不安
+    def setUp(self):
+        self.user = User.objects.create_user(username="tester", password="testpassword")
+        self.client.login(username="tester", password="testpassword")
+
+    def test_success_get(self):
+        response = self.client.get(reverse("tweets:home"))
+        self.assertEqual(response.status_code, 200)
+
+
 # from django.test import TestCase
 
 
